@@ -1,0 +1,292 @@
+
+\documentclass[12pt]{amsart}
+\usepackage{fullpage}
+\usepackage{bm}
+\usepackage[all]{xy}
+\usepackage{tikz}
+\usepackage{amsmath, amsthm, amscd, amssymb, amsfonts, latexsym}
+\usepackage{mathrsfs,amssymb}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{bbm}
+\usepackage{float}
+\usepackage{dsfont,multirow}
+\usepackage{relsize}
+\usepackage{hyperref}
+\usepackage[mathscr]{euscript}
+\usepackage{graphicx}
+%\usepackage{upgreek}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{hypothesis}[theorem]{Hypothesis}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{remark}[theorem]{Remark}
+\def\limproj{\mathop{\oalign{\hfil$\rm lim$\hfil\cr$\longleftarrow$\cr}}}
+%\setlength{\parindent}{0cm}
+\DeclareMathOperator{\re}{Re}
+\DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\sgn}{{lc}}
+
+
+\newcommand{\cB}{\mathcal{B}}
+\newcommand{\NOR}{\text{ NOR }}
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Qp}{\mathbb{Q}_{p}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Zp}{\mathbb{Z}_{p}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\X}{\mathbb{X}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\Fq}{\mathbb{F}_{q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\p}{\mathfrak{p}}
+\newcommand{\ok}{\mathfrak{o}_{K}}
+\newcommand{\A}{\mathfrak{a}}
+\newcommand{\gp}{G_{\p}}
+\newcommand{\hp}{H_{\p}}
+\newcommand{\T}{\mathbb{T}}
+%\newcommand{\sgn}{\text{sgn}}
+\newcommand{\kommentar}[1]{}
+\def\fm{\mathfrak{m}}
+\def\fp{\mathfrak{p}}
+\def\fd{\mathfrak{d}}
+\def\ff{\mathfrak{f}}
+\def\fa{\mathfrak{a}}
+\def\fb{\mathfrak{b}}
+\def\fc{\mathfrak{c}}
+\def\fp{\mathfrak{p}}
+\def\fF{\mathfrak{F}}
+\def\fA{\mathfrak{A}}
+\def\fM{\mathfrak{M}} \def\fU{\mathfrak{U}} \def\fS{\mathfrak{S}}
+\def\fN{\mathfrak{N}} \def\fn{\mathfrak{n}} \def\fL{\mathfrak{L}}
+\def\fO{\mathfrak{O}}
+\def\fD{\mathfrak{D}}
+\def\cC{\mathcal{C}}
+\def\cL{\mathcal{L}}
+\def\cLs{\mathcal{L}^{*}}
+
+\begin{document}
+
+%+Title
+\title{Experimental Data on Minimal NOR Gates Circuits}
+\author{Antoine Comeau-Lapointe}
+\date{\today}
+\numberwithin{equation}{section}
+\maketitle
+
+
+\section{Introduction} 
+This paper presents numerical data and statistics related to circuits with a minimum number of NOR gates assuming unlimited fan-off. While faster circuits exist in terms of signal propagation time, they require a larger number of gates. The first results concern circuits computing functions of the form
+\[ f: \{0,1\}^n \rightarrow \{0,1\}\]
+while the second results concern circuits computing permutations. We may restrict ourselves to NOR gates since the scope of this paper is about asymptotic behaviors: any 2-input gate can be realized with at most five NOR gates. The data and proof of optimality were obtained by constructing every possible circuit with a fixed number of input wires. The computations were done on an Intel Core i5-6600K CPU along with a NVIDIA GeForce RTX 3080 Ti GPU over the course of a single month. The code is available at \url{https://github.com/AntoineComeau/norgates}.
+
+\section{Single Output Functions}
+Given a function $f$ as described above, let $N(f)$ the minimum number of NOR gates required to construct a circuit that computes $f$. Let $M_n(m)$ the number of functions $f$ with $n$ input wires such that $N(f)=m$. Finally, let $B(n)$ be the maximum of $N(f)$ over every function $f$ with $n$ inputs. In particular,
+\[\sum_{i=0}^{B(n)} M_n(i)=2^n.\]
+Here are the results for $n=1,2,3,4$.
+\begin{table}[H]
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+$B(n)$ & 3 & 5 & 10 & 14 \\ \hline
+$n$    & 1 & 2 & 3  & 4  \\ \hline
+\end{tabular}
+\end{table}
+\begin{table}[H]
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+$M_1(i)$ & 1 & 1 & 1 & 1 \\ \hline
+$i$       & 0 & 1 & 2 & 3 \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\begin{tabular}{|l|l|l|l|l|l|l|}
+\hline 
+$M_2(i)$ & 2 & 3 & 4 & 4 & 2 & 1 \\ \hline
+$i$      & 0 & 1 & 2 & 3 & 4 & 5 \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|l|}
+\hline
+$M_3(i)$ & 3 & 6 & 13 & 26 & 43 & 48 & 53 & 36 & 22 & 5 & 1  \\ \hline
+$i$      & 0 & 1 & 2  & 3  & 4  & 5  & 6  & 7  & 8  & 9 & 10 \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|}
+\hline
+$M_4(i)$ & 4 & 10 & 31 & 98 & 293 & 807 & 2067 & 4351 & 8941 & 13085 & 16804  & 12210  & 5464  & 1319  & 52  \\ \hline
+$i$      & 0 & 1 & 2  & 3  & 4  & 5  & 6  & 7  & 8  & 9 & 10 & 11 & 12 & 13 & 14 \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+  \includegraphics{pic1.png}
+  \caption{Plot of $M_4$}
+\end{figure}
+
+The function corresponding to $M_1(3)$ is the constant function $1$. The function corresponding to $M_2(5)$ is the XOR function. The function corresponding to $M_3(10)$ is the following.
+\begin{table}[H]
+\begin{tabular}{|l|l|l|l|l|l|l|l|l|}
+\hline
+output & $1$   & $1$   & $1$   & $0$   & $1$   & $0$   & $0$   & $1$   \\ \hline
+input  & 000 & 001 & 010 & 011 & 100 & 101 & 110 & 111 \\ \hline
+\end{tabular}
+\end{table}
+For $M_4(14)$, the following is an example among the $52$ candidates.
+\begin{table}[H]
+\resizebox{\columnwidth}{!}{\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|}
+\hline
+output & 0    & 1    & 1    & 0    & 1    & 0    & 0    & 1    & 1    & 0    & 0    & 1    & 0    & 1    & 1    & 1    \\ \hline
+input  & 0000 & 0001 & 0010 & 0011 & 0100 & 0101 & 0110 & 0111 & 1000 & 1001 & 1010 & 1011 & 1100 & 1101 & 1110 & 1111 \\ \hline
+\end{tabular}}
+\end{table}
+One possible circuit that computes this function is given by
+\begin{align*}
+&x_4=x_0\NOR x_1\, ;\, x_5=x_3\NOR x_2\,;\,x_6=x_4\NOR x_0\,;\,x_7=x_4\NOR x_1\,;\,x_8=x_5\NOR x_2 \\
+&x_9=x_7\NOR x_6\,;\,x_{10}=x_9\NOR x_2\,;\,x_{11}=x_{10}\NOR x_3\,;\,x_{12}=x_{11}\NOR x_4\,;\,x_{13}=x_{11}\NOR x_8 \\
+&x_{14}=x_{13}\NOR x_5\,;\,x_{15}=x_{13}\NOR x_9\,;\,x_{16}=x_{14}\NOR x_{12}\,;\,x_{17}=x_{15}\NOR x_{16} 
+\end{align*}
+ where $x_0,x_1,x_2,x_3$ are the four input wires and $x_{17}$ is the output wire. A faster circuit in terms of signal propagation may exists using 14 NOR gates, but this is outside the scope of this paper. This is the first solution found by the code.
+
+\section{Permutations}
+Let $\pi \in S_r$ be a permutation of $r$ elements, where $r=2^n$. As above, let $N(\pi)$ be the minimal number of NOR gates required to construct a circuit that computes $\pi: \{0,1\}^n \rightarrow \{0,1\}^n$. Let also $M_n(m)$ and $B(n)$ be defined as above, but for permutations. In particular,
+\[\sum_{i=0}^{B(n)} M_n(i)=2^n!.\]
+Here are the results for $n=1,2,3$.
+\begin{table}[H]
+\begin{tabular}{|l|l|l|l|}
+\hline
+$B(n)$ & 1 & 5 & 15 \\ \hline
+$n$    & 1 & 2 & 3  \\ \hline
+\end{tabular}
+\end{table}
+\begin{table}[H]
+\begin{tabular}{|l|l|l|}
+\hline
+$M_1(i)$ & 1 & 1 \\ \hline
+$i$       & 0 & 1 \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\begin{tabular}{|l|l|l|l|l|l|l|}
+\hline
+$M_2(i)$ & 2 & 4 & 2 & 0 & 3 & 13 \\ \hline
+$i$       & 0 & 1 & 2 & 3 & 4 & 5  \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\begin{tabular}{|l|l|}
+\hline
+$i$  & $M_3(i)$ \\ \hline
+0  & 6       \\ \hline
+1  & 18      \\ \hline
+2  & 18      \\ \hline
+3  & 6       \\ \hline
+4  & 36      \\ \hline
+5  & 162     \\ \hline
+6  & 252     \\ \hline
+7  & 396     \\ \hline
+8  & 972     \\ \hline
+9  & 3648    \\ \hline
+10 & 6792    \\ \hline
+11 & 10770   \\ \hline
+12 & 10614   \\ \hline
+13 & 5922    \\ \hline
+14 & 672    \\ \hline
+15 & 36    \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+  \includegraphics{pic3.png}
+  \caption{Plot of $M_3$}
+\end{figure}
+\newpage
+
+In the following table, the value at $(x,y)$ is equal to
+\[ \#\{\pi \in S_4 \text{ such that  } N(\pi)=x \text{ and } N(\pi^{-1})=y \}. \]
+ 
+\begin{table}[H]
+\begin{tabular}{|l||l|l|l|l|l|l|}
+\hline
+y\textbackslash{}x & 0 & 1 & 2 & 3 & 4 & 5  \\ \hline \hline
+0                  & 2 & 0 & 0 & 0 & 0 & 0  \\ \hline
+1                  & 0 & 4 & 0 & 0 & 0 & 0  \\ \hline
+2                  & 0 & 0 & 2 & 0 & 0 & 0  \\ \hline
+3                  & 0 & 0 & 0 & 0 & 0 & 0  \\ \hline
+4                  & 0 & 0 & 0 & 0 & 2 & 1  \\ \hline
+5                  & 0 & 0 & 0 & 0 & 1 & 12 \\ \hline
+\end{tabular}
+\end{table}
+The single permutation at $(5,4)$ is given by $(0\text{ }2\text{ }1)$ under cycle notation.
+\\ \\
+
+In the following table, the value at $(x,y)$ is equal to
+\[ \#\{\pi \in S_8 \text{ such that  } N(\pi)=x \text{ and } N(\pi^{-1})=y \}. \]
+
+\begin{table}[H]
+\resizebox{\columnwidth}{!}{\begin{tabular}{|l||l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|}
+\hline
+y\textbackslash{}x & 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15 \\ \hline  \hline
+0                  & 6 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0  & 0  & 0  & 0  & 0  & 0  \\ \hline
+1                  & 0 & 18 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0  & 0  & 0  & 0  & 0  & 0  \\ \hline
+2                  & 0 & 0 & 18 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0  & 0  & 0  & 0  & 0  & 0  \\ \hline
+3                  & 0 & 0 & 0 & 6 & 0 & 0 & 0 & 0 & 0 & 0 & 0  & 0  & 0  & 0  & 0  & 0  \\ \hline
+4                  & 0 & 0 & 0 & 0 & 36 & 0 & 0 & 0 & 0 & 0 & 0  & 0  & 0  & 0  & 0  & 0  \\ \hline
+5                  & 0 & 0 & 0 & 0 & 0 & 162 & 0 & 0 & 0 & 0 & 0  & 0  & 0  & 0  & 0  & 0  \\ \hline
+6                  & 0 & 0 & 0 & 0 & 0 & 0 & 252 & 0 & 0 & 0 & 0  & 0  & 0  & 0  & 0  & 0  \\ \hline
+7                  & 0 & 0 & 0 & 0 & 0 & 0 & 0 &396  & 0 & 0 & 0  & 0  & 0  & 0  & 0  & 0  \\ \hline
+8                  & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 756 & 180 & 36  & 0  & 0  & 0  & 0  & 0  \\ \hline
+9                  & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 180 & 2496 & 828  & 144  & 0  & 0  & 0  & 0  \\ \hline
+10                 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 36 & 828 & 3678  & 1854  & 360  & 36  & 0  & 0  \\ \hline
+11                 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 144 & 1854  & 5766  & 2736  & 270  & 0  & 0  \\ \hline
+12                 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 360  & 2736  & 5430  & 2052  & 36  & 0  \\ \hline
+13                 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 36  & 270  & 2052  & 3384  & 180  & 0  \\ \hline
+14                 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0  & 0  & 36  & 180  & 456  & 0  \\ \hline
+15                 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0  & 0  & 0  & 0  & 0  & 36  \\ \hline
+\end{tabular}}
+\end{table}
+
+We observe a strong correlation between a permutation and its inverse, especially when $N(\pi)$ is low. The group $S_3 \times S_3$ acts on $S_8$ by permuting the input and output wires. This induces a partition of $S_8$. The 36 permutations with the highest difference $N(\pi)-N(\pi^{-1})=3$ are a single block of this partition, with $\pi=(0\text{ }4)(1\text{ } 2\text{ } 3 \text{ }5)(6\text{ } 7)$ as an example under cyle notation. 
+\\ \\ The 36 permutations at position $(15,15)$ are also a single block of this partition. Here's a circuit computing a permutation with $N(\pi)=15$.
+\begin{align*}
+&x_3=x_0\NOR x_0\, ;\, x_4=x_1\NOR x_0\,;\,x_5=x_2\NOR x_0\,;\,x_6=x_4\NOR x_2\,;\,x_7=x_5\NOR x_1 \\
+&x_8=x_6\NOR x_3\,;\,x_{9}=x_8\NOR x_7\,;\,x_{10}=x_{9}\NOR x_9\,;\,x_{11}=x_{10}\NOR x_5\,;\,x_{12}=x_{10}\NOR x_6 \\
+&x_{13}=x_{11}\NOR x_4\,;\,x_{14}=x_{12}\NOR x_8\,;\,x_{15}=x_{14}\NOR x_{1}\,;\,x_{16}=x_{15}\NOR x_{9} \,;\,x_{17}=x_{16}\NOR x_{4} 
+\end{align*}
+where $x_0$, $x_1$, and $x_2$ are the input wires and $x_{13}$, $x_{14}$, and $x_{17}$ are the output wires. Under cycle notation, this circuit computes $(1\text{ } 3 \text{ }6 \text{ }4\text{ } 2\text{ } 7)$. \\ \\
+The main question is about whether the asymptotic behavior of 
+\[ \text{max}_{\pi \in S_n} (N(\pi)-N(\pi^{-1}))\]
+is polynomial or exponential.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
