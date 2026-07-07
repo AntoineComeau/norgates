@@ -87,7 +87,7 @@
 
 
 \section{Introduction} 
-This paper presents numerical data and statistics related to circuits with a minimum number of NOR gates assuming unlimited fan-off. While faster circuits exist in terms of signal propagation time, they require a larger number of gates. The first results concern circuits computing functions of the form
+This paper presents numerical data and statistics related to circuits with a minimum number of NOR gates assuming unlimited fan-out. While faster circuits exist in terms of signal propagation time, they require a larger number of gates. The first results concern circuits computing functions of the form
 \[ f: \{0,1\}^n \rightarrow \{0,1\}\]
 while the second results concern circuits computing permutations. We may restrict ourselves to NOR gates since the scope of this paper is about asymptotic behaviors: any 2-input gate can be realized with at most five NOR gates. The data and proof of optimality were obtained by constructing every possible circuit with a fixed number of input wires. The computations were done on an Intel Core i5-6600K CPU along with a NVIDIA GeForce RTX 3080 Ti GPU over the course of a single month. The code is available at \url{https://github.com/AntoineComeau/norgates}.
 
@@ -161,7 +161,7 @@ One possible circuit that computes this function is given by
 &x_9=x_7\NOR x_6\,;\,x_{10}=x_9\NOR x_2\,;\,x_{11}=x_{10}\NOR x_3\,;\,x_{12}=x_{11}\NOR x_4\,;\,x_{13}=x_{11}\NOR x_8 \\
 &x_{14}=x_{13}\NOR x_5\,;\,x_{15}=x_{13}\NOR x_9\,;\,x_{16}=x_{14}\NOR x_{12}\,;\,x_{17}=x_{15}\NOR x_{16} 
 \end{align*}
- where $x_0,x_1,x_2,x_3$ are the four input wires and $x_{17}$ is the output wire. A faster circuit in terms of signal propagation may exists using 14 NOR gates, but this is outside the scope of this paper. This is the first solution found by the code.
+ where $x_0,x_1,x_2,x_3$ are the four input wires and $x_{17}$ is the output wire. A faster circuit in terms of signal propagation may exist using 14 NOR gates, but this is outside the scope of this paper. This is the first solution found by the code.
 
 \section{Permutations}
 Let $\pi \in S_r$ be a permutation of $r$ elements, where $r=2^n$. As above, let $N(\pi)$ be the minimal number of NOR gates required to construct a circuit that computes $\pi: \{0,1\}^n \rightarrow \{0,1\}^n$. Let also $M_n(m)$ and $B(n)$ be defined as above, but for permutations. In particular,
